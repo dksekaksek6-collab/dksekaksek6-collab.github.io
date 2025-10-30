@@ -1,9 +1,24 @@
+<div class="external-links">
+                        <a href="career.html" target="_self" class="link-button">경력기술서</a>
+                        <a href="portfolio.html" target="_self" class="link-button">포트폴리오</a>
+                    </div>
+                </section>
+
+                ```
+
+---
+
+### 📁 2. career.html (경력 기술서 - 신규 파일)
+
+이 코드를 복사하여 `career.html`이라는 새 파일로 저장하세요.
+
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>박상범 - 콘텐츠 디렉터 이력서</title>
+    <title>박상범 - 경력 기술서</title>
     <style>
         /* 1. Reset and base styles (From Card) */
         :root {
@@ -180,9 +195,8 @@
           bottom: 0;
           width: 100%;
           height: 100%;
-          /* 이력서 내용에 맞게 패딩 조정 */
           padding: 25px; 
-          overflow-y: auto; /* 내용이 길어지면 스크롤 */
+          overflow-y: auto; 
           overflow-x: hidden;
         }
         
@@ -199,27 +213,26 @@
           border-radius: 4px;
         }
         .content-container::-webkit-scrollbar-thumb:hover {
-          background-color: #ffaa6e; /* border color light */
+          background-color: #ffaa6e; 
         }
         .content-container {
           scrollbar-width: thin;
           scrollbar-color: var(--electric-border-color) rgba(0, 0, 0, 0.2);
         }
 
-        /* 5. Resume Content Styles (Imported & Adapted for Dark Mode) */
+        /* 5. Resume Content Styles (Adapted for Dark Mode) */
         .resume-content header {
             text-align: center;
             padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            border: 4px solid rgba(255, 255, 255, 0.2);
+        /* '돌아가기' 버튼 스타일 (NEW) */
+        .back-button-container {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .resume-content h1 {
@@ -227,23 +240,6 @@
             font-weight: 600;
             margin-bottom: 5px;
             color: #ffffff;
-        }
-
-        .job-title {
-            font-size: 1.1rem;
-            font-weight: 300;
-            color: var(--electric-border-color);
-            margin-bottom: 15px;
-        }
-
-        #about p {
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-        }
-
-        .resume-content main {
-            padding-top: 20px;
         }
 
         .resume-content section {
@@ -258,22 +254,6 @@
             padding-bottom: 8px;
             border-bottom: 2px solid var(--electric-border-color);
             display: inline-block;
-        }
-
-        .skills-list {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px; /* 태그 사이의 간격 */
-        }
-
-        .skills-list li {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            padding: 6px 14px;
-            border-radius: 20px; /* 알약 모양 */
-            font-size: 0.85rem;
-            font-weight: 500;
         }
 
         .project-item {
@@ -304,28 +284,19 @@
             margin-bottom: 10px;
         }
 
-        .project-item p {
+        /* 상세 업무 기술용 스타일 (NEW) */
+        .project-item ul {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 0;
-            line-height: 1.5;
-        }
-        
-        .project-item p strong {
-             color: var(--electric-border-color); /* 성과 부분 강조 */
-        }
-
-        .external-links {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 10px;
+            padding-left: 20px;
+            line-height: 1.6;
         }
 
         .link-button {
             display: inline-block;
             background-color: var(--electric-border-color);
-            color: #000000; /* 어두운 글자색 */
+            color: #000000;
             padding: 8px 18px;
             border-radius: 25px;
             text-decoration: none;
@@ -335,68 +306,43 @@
         }
 
         .link-button:hover {
-            background-color: #ffaa6e; /* border color light */
+            background-color: #ffaa6e; 
         }
 
-        #contact ul {
-            list-style: none;
+        /* '돌아가기' 버튼 전용 스타일 (NEW) */
+        .back-button {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
         }
-
-        #contact li {
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 8px;
-        }
-
-        #contact a {
-            color: var(--electric-border-color);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        #contact a:hover {
-            text-decoration: underline;
-        }
-
-        .resume-content footer {
-            text-align: center;
-            padding: 20px 0 0 0;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
 <body>
-
     <main class="main-container">
-        <svg class="svg-container">
+      <svg class="svg-container">
         <defs>
           <filter id="turbulent-displace" colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
             <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
               <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
             </feOffset>
-    
             <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="1" />
             <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
               <animate attributeName="dy" values="0; -700" dur="6s" repeatCount="indefinite" calcMode="linear" />
             </feOffset>
-    
             <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="2" />
             <feOffset in="noise1" dx="0" dy="0" result="offsetNoise3">
               <animate attributeName="dx" values="490; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
             </feOffset>
-    
             <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="2" />
             <feOffset in="noise2" dx="0" dy="0" result="offsetNoise4">
               <animate attributeName="dx" values="0; -490" dur="6s" repeatCount="indefinite" calcMode="linear" />
             </feOffset>
-    
             <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
             <feComposite in="offsetNoise3" in2="offsetNoise4" result="part2" />
             <feBlend in="part1" in2="part2" mode="color-dodge" result="combinedNoise" />
-    
             <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="30" xChannelSelector="R" yChannelSelector="B" />
           </filter>
         </defs>
@@ -410,7 +356,6 @@
           <div class="glow-layer-1"></div>
           <div class="glow-layer-2"></div>
         </div>
-    
         <div class="overlay-1"></div>
         <div class="overlay-2"></div>
         <div class="background-glow"></div>
@@ -418,91 +363,61 @@
         <div class="content-container">
           <div class="resume-content">
             
-            <header id="about">
-                <img src="images/profile.jpg" alt="박상범 프로필 이미지" class="profile-img">
-                <h1>박상범</h1>
-                <p class="job-title">콘텐츠 디렉터 | 올라운더 PD</p>
-                <p>
-                    유튜브와 AI의 접점에서 새로운 가능성을 발견하고 교육에 접목시키는 콘텐츠 디렉터입니다.
-                    4년 6개월의 현장 경험으로 기획부터 편집까지 전 과정을 아우르는 올라운더 역량을 갖추었습니다.
-                </p>
+            <header>
+                <div class="back-button-container">
+                    <a href="index.html" class="link-button back-button">이력서로 돌아가기</a>
+                </div>
+                <h1>경력 기술서</h1>
             </header>
 
             <main>
-                <section id="skills">
-                    <h2>기술 스택 (Skills)</h2>
-                    <ul class="skills-list">
-                        <li>콘텐츠 전략/기획</li>
-                        <li>AI 활용 자동화</li>
-                        <li>데이터 기반 분석</li>
-                        <li>1인 영상 제작</li>
-                        <li>온라인 강의 상품화</li>
-                        <li>Premiere Pro</li>
-                        <li>After Effects</li>
-                        <li>Capcut / Vrew</li>
-                        <li>ChatGPT / Claude</li>
-                        <li>HeyGen / Kling</li>
-                        <li>Notion</li>
-                    </ul>
-                </section>
-
-                <section id="projects">
-                    <h2>주요 경력 (Experience)</h2>
-
+                <section id="career-details">
                     <div class="project-item">
                         <h3>에이블 코퍼레이션 <span class="project-role">팀장</span></h3>
                         <p class="project-period">2024.05 - 2025.03 (10개월)</p>
-                        <p><strong>성과:</strong> 광고 단가 47% 절감, 고객 DB 확보</p>
+                        <ul>
+                            <li>[이곳에 광고 단가 절감 및 DB 확보를 위해 수행한 상세 업무 내용을 기재하세요.]</li>
+                            <li>[예: A/B 테스트를 통한 광고 소재 최적화, 신규 키워드 발굴 등]</li>
+                            <li>[성과: 광고 단가 47% 절감 (15,000원→8,000원)]</li>
+                        </ul>
                     </div>
 
                     <div class="project-item">
                         <h3>메타미디어 <span class="project-role">팀장</span></h3>
                         <p class="project-period">2024.01 - 2024.04 (3개월)</p>
-                        <p><strong>성과:</strong> 계약 종료 위기 클라이언트 67% 유지</p>
+                        <ul>
+                            <li>[클라이언트 유지 성공을 위해 수행한 상세 업무 내용을 기재하세요.]</li>
+                            <li>[예: 클라이언트 니즈 재분석, 맞춤형 콘텐츠 전략 제안 등]</li>
+                            <li>[성과: 계약 종료 위기 클라이언트 67% 유지 성공]</li>
+                        </ul>
                     </div>
                     
                     <div class="project-item">
                         <h3>KH 아카데미 <span class="project-role">강사</span></h3>
                         <p class="project-period">2024.06 - 2025.03 (9개월)</p>
-                        <p><strong>성과:</strong> 3개월만에 구독자 3만 달성 수강생 배출</p>
+                        <ul>
+                            <li>[AI 활용 유튜브 기초 강의 내용과 성과를 상세히 기재하세요.]</li>
+                            <li>[예: Chat GPT 활용 기획안 작성법, Vrew/Kling 활용 편집 자동화 등]</li>
+                            <li>[성과: 3개월만에 구독자 3만 달성 수강생 배출]</li>
+                        </ul>
                     </div>
 
                     <div class="project-item">
                         <h3>박세니 마인드코칭 <span class="project-role">PD/팀장</span></h3>
                         <p class="project-period">2021.06 - 2024.01 (2년 7개월)</p>
-                        <p><strong>성과:</strong> 온라인 강의 1만건+ 판매, 구독자 150% 성장</p>
+                        <ul>
+                            <li>[온라인 강의 판매 및 구독자 성장을 위해 수행한 상세 업무 내용을 기재하세요.]</li>
+                            <li>[예: 데이터 분석 기반 신규 코너 기획, 쇼츠 전략 도입 등]</li>
+                            <li>[성과: 온라인 강의 10,084건 판매, 구독자 150% 성장 (4만→10만)]</li>
+                        </ul>
                     </div>
 
-                    <div class="project-item">
-                        <h3>뮤라벨 <span class="project-role">PD(팀장)</span></h3>
-                        <p class="project-period">2022.12 - 2023.08 (9개월)</p>
-                        <p><strong>성과:</strong> 최대 200만 조회수 영상 제작</p>
-                    </div>
-                    
-                    <div class="external-links">
-                        <a href="[경력기술서 링크]" target="_blank" class="link-button">경력기술서</a>
-                        <a href="[포트폴리오 링크]" target="_blank" class="link-button">포트폴리오</a>
-                    </div>
-                </section>
-
-                <section id="contact">
-                    <h2>연락처 (Contact)</h2>
-                    <ul>
-                        <li><strong>Email:</strong> <a href="mailto:dksekaksek2@naver.com">dksekaksek2@naver.com</a></li>
-                        <li><strong>Phone:</strong> 010-6752-0325</li>
-                        <li><strong>Location:</strong> 수원 거주</li>
-                    </ul>
-                </section>
+                    </section>
             </main>
-
-            <footer>
-                <p>&copy; 2025 박상범. All rights reserved.</p>
-            </footer>
 
           </div>
         </div>
       </div>
     </main>
-
 </body>
 </html>
