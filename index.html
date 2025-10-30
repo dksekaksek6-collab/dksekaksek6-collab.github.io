@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박상범 - 콘텐츠 디렉터 이력서</title>
+    <style>
+        /* 1. Reset and base styles (From Card) */
+        :root {
+          --electric-border-color: #dd8448;
+          --electric-light-color: oklch(from var(--electric-border-color) l c h);
+          --gradient-color: oklch(
+            from var(--electric-border-color) 0.3 calc(c / 2) h / 0.4
+          );
+          --color-neutral-900: oklch(0.185 0 0);
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: system-ui, -apple-system, sans-serif;
+          background-color: oklch(0.145 0 0);
+          color: oklch(0.985 0 0);
+          height: 100vh;
+          overflow: hidden;
+        }
+
+        /* 2. Card Visual Styles (From Card) */
+        .main-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+        }
+
+        .svg-container {
+          position: absolute;
+        }
+
+        .card-container {
+          padding: 2px;
+          border-radius: 24px;
+          position: relative;
+          background: linear-gradient(
+              -30deg,
+              var(--gradient-color),
+              transparent,
+              var(--gradient-color)
+            ),
+            linear-gradient(
+              to bottom,
+              var(--color-neutral-900),
+              var(--color-neutral-900)
+            );
+        }
+
+        .inner-container {
+          position: relative;
+        }
+
+        .border-outer {
+          border: 2px solid rgba(221, 132, 72, 0.5);
+          border-radius: 24px;
+          padding-right: 4px;
+          padding-bottom: 4px;
+        }
+
+        .main-card {
+          width: 350px;
+          height: 500px;
+          border-radius: 24px;
+          border: 2px solid var(--electric-border-color);
+          margin-top: -4px;
+          margin-left: -4px;
+          filter: url(#turbulent-displace);
+        }
+
+        .glow-layer-1 {
+          border: 2px solid rgba(221, 132, 72, 0.6);
+          border-radius: 24px;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          filter: blur(1px);
+        }
+
+        .glow-layer-2 {
+          border: 2px solid var(--electric-light-color);
+          border-radius: 24px;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          filter: blur(4px);
+        }
+
+        .overlay-1 {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 24px;
+          opacity: 1;
+          mix-blend-mode: overlay;
+          transform: scale(1.1);
+          filter: blur(16px);
+          background: linear-gradient(
+            -30deg,
+            white,
+            transparent 30%,
+            transparent 70%,
+            white
+          );
+        }
+
+        .overlay-2 {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 24px;
+          opacity: 0.5;
+          mix-blend-mode: overlay;
+          transform: scale(1.1);
+          filter: blur(16px);
+          background: linear-gradient(
+            -30deg,
+            white,
+            transparent 30%,
+            transparent 70%,
+            white
+          );
+        }
+
+        .background-glow {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 24px;
+          filter: blur(32px);
+          transform: scale(1.1);
+          opacity: 0.3;
+          z-index: -1;
+          background: linear-gradient(
+            -30deg,
+            var(--electric-light-color),
+            transparent,
+            var(--electric-border-color)
+          );
+        }
+
+        /* 3. Content Container (Merged & Modified) */
+        .content-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          /* 이력서 내용에 맞게 패딩 조정 */
+          padding: 25px; 
+          overflow-y: auto; /* 내용이 길어지면 스크롤 */
+          overflow-x: hidden;
+        }
+        
+        /* 4. Custom Scrollbar (NEW) */
+        .content-container::-webkit-scrollbar {
+          width: 8px;
+        }
+        .content-container::-webkit-scrollbar-track {
+          background: rgba(0, 0, 0, 0.2);
+          border-radius: 4px;
+        }
+        .content-container::-webkit-scrollbar-thumb {
+          background-color: var(--electric-border-color);
+          border-radius: 4px;
+        }
+        .content-container::-webkit-scrollbar-thumb:hover {
+          background-color: #ffaa6e; /* border color light */
+        }
+        .content-container {
+          scrollbar-width: thin;
+          scrollbar-color: var(--electric-border-color) rgba(0, 0, 0, 0.2);
+        }
+
+        /* 5. Resume Content Styles (Imported & Adapted for Dark Mode) */
+        .resume-content header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .resume-content h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .job-title {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--electric-border-color);
+            margin-bottom: 15px;
+        }
+
+        #about p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .resume-content main {
+            padding-top: 20px;
+        }
+
+        .resume-content section {
+            margin-bottom: 30px;
+        }
+
+        .resume-content section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--electric-border-color);
+            display: inline-block;
+        }
+
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px; /* 태그 사이의 간격 */
+        }
+
+        .skills-list li {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: 20px; /* 알약 모양 */
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .project-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .project-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0px;
+        }
+        
+        .project-role {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--electric-border-color);
+        }
+
+        .project-period {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .project-item p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+        
+        .project-item p strong {
+             color: var(--electric-border-color); /* 성과 부분 강조 */
+        }
+
+        .external-links {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .link-button {
+            display: inline-block;
+            background-color: var(--electric-border-color);
+            color: #000000; /* 어두운 글자색 */
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .link-button:hover {
+            background-color: #ffaa6e; /* border color light */
+        }
+
+        #contact ul {
+            list-style: none;
+        }
+
+        #contact li {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 8px;
+        }
+
+        #contact a {
+            color: var(--electric-border-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        #contact a:hover {
+            text-decoration: underline;
+        }
+
+        .resume-content footer {
+            text-align: center;
+            padding: 20px 0 0 0;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <main class="main-container">
+        <svg class="svg-container">
+        <defs>
+          <filter id="turbulent-displace" colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
+            <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+              <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
+            </feOffset>
+    
+            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="1" />
+            <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+              <animate attributeName="dy" values="0; -700" dur="6s" repeatCount="indefinite" calcMode="linear" />
+            </feOffset>
+    
+            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="2" />
+            <feOffset in="noise1" dx="0" dy="0" result="offsetNoise3">
+              <animate attributeName="dx" values="490; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
+            </feOffset>
+    
+            <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="2" />
+            <feOffset in="noise2" dx="0" dy="0" result="offsetNoise4">
+              <animate attributeName="dx" values="0; -490" dur="6s" repeatCount="indefinite" calcMode="linear" />
+            </feOffset>
+    
+            <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
+            <feComposite in="offsetNoise3" in2="offsetNoise4" result="part2" />
+            <feBlend in="part1" in2="part2" mode="color-dodge" result="combinedNoise" />
+    
+            <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="30" xChannelSelector="R" yChannelSelector="B" />
+          </filter>
+        </defs>
+      </svg>
+    
+      <div class="card-container">
+        <div class="inner-container">
+          <div class="border-outer">
+            <div class="main-card"></div> 
+          </div>
+          <div class="glow-layer-1"></div>
+          <div class="glow-layer-2"></div>
+        </div>
+    
+        <div class="overlay-1"></div>
+        <div class="overlay-2"></div>
+        <div class="background-glow"></div>
+    
+        <div class="content-container">
+          <div class="resume-content">
+            
+            <header id="about">
+                <img src="images/profile.jpg" alt="박상범 프로필 이미지" class="profile-img">
+                <h1>박상범</h1>
+                <p class="job-title">콘텐츠 디렉터 | 올라운더 PD</p>
+                <p>
+                    유튜브와 AI의 접점에서 새로운 가능성을 발견하고 교육에 접목시키는 콘텐츠 디렉터입니다.
+                    4년 6개월의 현장 경험으로 기획부터 편집까지 전 과정을 아우르는 올라운더 역량을 갖추었습니다.
+                </p>
+            </header>
+
+            <main>
+                <section id="skills">
+                    <h2>기술 스택 (Skills)</h2>
+                    <ul class="skills-list">
+                        <li>콘텐츠 전략/기획</li>
+                        <li>AI 활용 자동화</li>
+                        <li>데이터 기반 분석</li>
+                        <li>1인 영상 제작</li>
+                        <li>온라인 강의 상품화</li>
+                        <li>Premiere Pro</li>
+                        <li>After Effects</li>
+                        <li>Capcut / Vrew</li>
+                        <li>ChatGPT / Claude</li>
+                        <li>HeyGen / Kling</li>
+                        <li>Notion</li>
+                    </ul>
+                </section>
+
+                <section id="projects">
+                    <h2>주요 경력 (Experience)</h2>
+
+                    <div class="project-item">
+                        <h3>에이블 코퍼레이션 <span class="project-role">팀장</span></h3>
+                        <p class="project-period">2024.05 - 2025.03 (10개월)</p>
+                        <p><strong>성과:</strong> 광고 단가 47% 절감, 고객 DB 확보</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>메타미디어 <span class="project-role">팀장</span></h3>
+                        <p class="project-period">2024.01 - 2024.04 (3개월)</p>
+                        <p><strong>성과:</strong> 계약 종료 위기 클라이언트 67% 유지</p>
+                    </div>
+                    
+                    <div class="project-item">
+                        <h3>KH 아카데미 <span class="project-role">강사</span></h3>
+                        <p class="project-period">2024.06 - 2025.03 (9개월)</p>
+                        <p><strong>성과:</strong> 3개월만에 구독자 3만 달성 수강생 배출</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>박세니 마인드코칭 <span class="project-role">PD/팀장</span></h3>
+                        <p class="project-period">2021.06 - 2024.01 (2년 7개월)</p>
+                        <p><strong>성과:</strong> 온라인 강의 1만건+ 판매, 구독자 150% 성장</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>뮤라벨 <span class="project-role">PD(팀장)</span></h3>
+                        <p class="project-period">2022.12 - 2023.08 (9개월)</p>
+                        <p><strong>성과:</strong> 최대 200만 조회수 영상 제작</p>
+                    </div>
+                    
+                    <div class="external-links">
+                        <a href="[경력기술서 링크]" target="_blank" class="link-button">경력기술서</a>
+                        <a href="[포트폴리오 링크]" target="_blank" class="link-button">포트폴리오</a>
+                    </div>
+                </section>
+
+                <section id="contact">
+                    <h2>연락처 (Contact)</h2>
+                    <ul>
+                        <li><strong>Email:</strong> <a href="mailto:dksekaksek2@naver.com">dksekaksek2@naver.com</a></li>
+                        <li><strong>Phone:</strong> 010-6752-0325</li>
+                        <li><strong>Location:</strong> 수원 거주</li>
+                    </ul>
+                </section>
+            </main>
+
+            <footer>
+                <p>&copy; 2025 박상범. All rights reserved.</p>
+            </footer>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+</body>
+</html>
